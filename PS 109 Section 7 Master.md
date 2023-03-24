@@ -1,10 +1,10 @@
 ---
-title: "PS 109 Section 8"
+title: "PS 109 Section 7"
 output: html_document
 date: "2023-03-09"
 ---
 
-```{r setup, include=FALSE}
+```
 knitr::opts_chunk$set(echo = TRUE)
 
 IRkernel::installspec()
@@ -12,19 +12,17 @@ IRkernel::installspec()
 
 #setup
 library(ggplot2)
-library(IRkernel)
 ```
-This first part is the continuation of Section 7. Start where you left off. 
 
-# PS 109 Section 7, March 10, 2023
+# PS 109 Section 7, March 10, 2022
 
 We are now entering the more hands-on series of section. Throughout the next weeks, you will learn and practice basic skills for the quantitative analysis of data in political science. 
 
-First, we are going to explore an important source of data for Latinx politics and explore its structure and meaning through the codebook. A codebook goes through the process that researchers undertake when assigning value to their data. It explains how researchers think about their data, how they code their variables, define them, and how they perform calculations. The codebook is the recipe and the dataframe is the dish.   
+First, we are going to explore an important source of data for Latinx politics and explore its structure and meaning through the codebook. A codebook goes through the process that researchers undertake when assigning value to their data. It explains how researchers think about their data, how they code their variables, define them, and how they perform calculations. The codebook is the recipe and the dataframe us the dish.    
 
 The American National Election Studies (ANES) produces data from its own surveys on voting, public opinion, and political participation. This data ranges from 1948 to 2020. 
 
-For this class, we will be working with the ANES Latino data, which you can find on Bcourses, under Section Materials -> Data Sources. More experienced R users can download the data and perform tasks directly on their desktops, using RStudio. 
+For this class, we will be working with the ANES Latino data, which you can find on Bcourses, under Section Materials -> Data Sources here. More experienced R users can download the data and perform tasks directly on their desktops, using RStudio. 
 
 The anes_latino dataframe is the subsample of the general anes data that only includes Latinx/o/a respondents. 
 
@@ -44,17 +42,9 @@ To set up your working directory, you can click on Session on the main menu and 
 
 Alternatively, you can use the 'setwd' command. To learn how to use any command, you can always look for help within R, or Google how to do a specific task. 
 
-```{r}
-#If working on Rstudio directly from your desktop, make sure to set your working directory
-setwd("C:/Users/hanna/Documents/GitHub/PS109S2023")
+## Review ok key concepts
 
-#The question mark allows us to ask R for help about a particular command
-```
-# Section 7
-
-## Review of key concepts
-
-* What is a data frame?
+* What is a data frame? Like a spreadsheet, a dataframe organizes data into columns and rows. 
 ** What do columns and rows represent?
 * What is a variable? A place holder for certain values.
 * What is an observation?
@@ -62,38 +52,37 @@ setwd("C:/Users/hanna/Documents/GitHub/PS109S2023")
 * What is a command?
 * What is an environment?
 
-```{r}
-#load data using the 'read.csv("name")' command. Advanced: load data and store it into an object
 
+```
+#load data using the 'read.csv' command. Advanced: load data and store it into an object
 
 #object_name <- object_contents
 
 anes <- read.csv("anes_latino.csv")
 
-anes
-
 #Why might we want to create objects?
 
 #Now let's take a look at the header of our dataframem using the command 'head()'
-
 head(anes)
 
 #How many variables do we see?
 
 #What if we only want to see the first three rows?
 
+head(anes, n=3)
 
 #What if we want to view the entire dataframe? Use the 'print' function.
 
-
+print(anes)
 
 #Find the dimensions of your dataframe using the command 'dim'- what does dimensions mean in this context?
-
+dim(anes)
 
 #How many rows does the data set have? How many columns? What do these represent?
 
 
 ```
+
 ## Understanding data contents and variables
 
 A dataset and dataframe are many times used interchangeably, the subtle difference is the structure. A $\textbf{dataset}$ is a set or collection of data, broadly defined. A \textbf{dataframe} is a dataset in rectangular format, meaning it is organized in rows and columns. This makes it easier to understand and interact, or perform functions, with the data. 
@@ -105,18 +94,20 @@ input -> function -> output
 ### What is the difference between a variable and an observation?
 An observation is information on a particular variable for a particular subject or unit of observation.
 
-```{r}
+
+```
 #How many observations are in this dataframe? Use the command 'nrow'
 
 nrow(anes)
-ncol(anes)
 
 #How do we check for missing observations or missing values? Use the command 'is.na'
 
+is.na(anes)
 
 #For advanced R users. How else might we want to check for missing values?
 
 ```
+
 #### What are the units of observation in this dataframe?
 
 To understand what the variable names and values mean, it is vital to understand the related codebook. As mentioned above, a codebook provides a description of each variable, including its name, label, data type, and values. It also includes information about how the variable was measured, how missing values are coded, and any special codes or categories used in the variable. 
@@ -143,9 +134,6 @@ Time series data involves measurements or observations of a single variable over
 *  What is a sample?
 *  Why are the data weighted?
 
-
-# Section 8
-
 ## Understanding variables of interest
 Now that we know the connection between the codebook and the data, let's gather some information about Latinx politics.
 
@@ -161,58 +149,74 @@ Time to play around with two variables of interest. Let's say we are interested 
 * dem_hisptyp_1st
 * postvote_rvote
 
-
 #### How do we select one variable within a dataframe? Using the $ symbol.
 
-```{r}
+
+```
 #df$variable of interest
 
 #Refer to the dem_hisp and postvote_rvote variables using the $ symbol:
 
-
+anes$dem_hisp
+anes$postvote_rvote
 ```
 
 
-```{r}
+```
 #Check the range of the two variables using the 'range' command
 
+range(anes$dem_hisp)
 
 #Why is the range 1 to 1?
 
+range(anes$postvote_rvote)
 
 #How do we interpret this range? Let's take a look at the codebook again.
 
 
 #Let's assign shorter object names to these
 
+hisp <- anes$dem_hisp
+vote <- anes$postvote_rvote
+org <- anes$dem_hisptyp_1st
 
 ```
+
 #### Is there a relationship between country of origin and voting? Let's look at the correlation between the variables
 
-```{r}
+
+```
 #Use the command 'cor'
 
+cor(org, vote)
 
 #How can we interpret this? Maybe correlation is not the best way to look at the relationship between these two variables.
 
 ```
+
 ##### Let's try to plot them!
 
-```{r}
+
+```
 
 #Create a histogram for each variable, using 'hist'
-
+hist(org)
+hist(vote)
 
 #Create a bar plot of org and vote, use 'barplot'
 
+barplot(org, vote)
 
 #OK, not very helpful. How can we restrict our plot to 'yes' or 'no' answers?
 
 
 ```
+
 Let's try a scatterplot instead, use the 'plot' command
 
-```{r}
+
+```
+plot(org, vote)
 
 # Create a logical index to subset the data
 idx <- (vote %in% c(1, 4))
@@ -222,16 +226,16 @@ barplot(org[idx], vote[idx], xlab = "Org", ylab = "Vote", main = "Scatterplot of
 
 #Maybe there's a more straightforward way to look at our data? Let's try tabulations. Use 'table' command assign it to the object 'tab' 
 
+tab <- table(org, vote)
+tab
 
 #Name the rows and columns using the following syntax:
 dimnames(tab) <- list(c("Row1", "Row2", "Row3"), c("Column1", "Column2"))
 
 ```
+
 We will be looking at different ways to visualize our data and understand correlations and tabulations next time! 
 
 * What kind of questions can we answer with this data?
 * What kind of conclusions could we draw?
 * What are the limitations of the data?
-
-
-# PS 109 Section 8, March 22, 2023
