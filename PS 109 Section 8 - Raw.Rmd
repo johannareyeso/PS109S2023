@@ -7,12 +7,12 @@ date: "2023-03-09"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-IRkernel::installspec()
-
-
 #setup
 library(ggplot2)
 library(IRkernel)
+library(dplyr)
+
+#install.packages("dplyr")
 ```
 This first part is the continuation of Section 7. Start where you left off. 
 
@@ -108,8 +108,6 @@ An observation is information on a particular variable for a particular subject 
 ```{r}
 #How many observations are in this dataframe? Use the command 'nrow'
 
-nrow(anes)
-ncol(anes)
 
 #How do we check for missing observations or missing values? Use the command 'is.na'
 
@@ -144,7 +142,12 @@ Time series data involves measurements or observations of a single variable over
 *  Why are the data weighted?
 
 
-# Section 8
+# PS 109 Section 8, March 22, 2023
+
+```{r}
+#reload data and assign to an object 
+```
+
 
 ## Understanding variables of interest
 Now that we know the connection between the codebook and the data, let's gather some information about Latinx politics.
@@ -161,14 +164,19 @@ Time to play around with two variables of interest. Let's say we are interested 
 * dem_hisptyp_1st
 * postvote_rvote
 
+#What kind of variables are these? 
 
 #### How do we select one variable within a dataframe? Using the $ symbol.
 
 ```{r}
 #df$variable of interest
 
-#Refer to the dem_hisp and postvote_rvote variables using the $ symbol:
+#Refer to the dem_hisp and postvote_rvote variables using the $ symbol
 
+#Partner Exercise: Count for how many observations we have data in each variable. Use the sum command and is.na, plus the negation sign '!'
+
+
+#Count the distribution of the variable values, i.e. how many of each value in the range. Use the command 'table' and refer to the specific variable. 
 
 ```
 
@@ -195,8 +203,18 @@ Time to play around with two variables of interest. Let's say we are interested 
 
 #How can we interpret this? Maybe correlation is not the best way to look at the relationship between these two variables.
 
+#Find the mean of postvote_rvote for Mexican Americans only. Use the following syntax. 
+
+#mean(data$var1[data$var2 == ?], na.rm = TRUE)
+
+
+#Whar does na.rm do in this case? Is it applicable here? Why/why not?
+
+
 ```
-##### Let's try to plot them!
+##### Let's try to plot them! 
+
+###### Advanced users do the below using 'ggplot'. Then re-label the axis, add a title and subtitle, and change the color scale (bringing in a palette). Refer to the 'ggplot' documentation. Assign your plot to an object and open it.  
 
 ```{r}
 
@@ -214,24 +232,37 @@ Let's try a scatterplot instead, use the 'plot' command
 
 ```{r}
 
-# Create a logical index to subset the data
+# Create a logical index to subset the data. A logical index is a vector or array of Boolean (logical) values that indicate whether an element in a vector or array satisfies a certain condition. In this case, let's pretend we just care about the values of 1 and 4 in 'postvote_rvote'. What do these represent? Notice I had already assigned the variable to the object 'vote'.
+
 idx <- (vote %in% c(1, 4))
 
-# Create a scatterplot of the selected data
-barplot(org[idx], vote[idx], xlab = "Org", ylab = "Vote", main = "Scatterplot of Selected Data")
+# Create a scatterplot of the selected data and rename the axes. 
 
 #Maybe there's a more straightforward way to look at our data? Let's try tabulations. Use 'table' command assign it to the object 'tab' 
 
 
 #Name the rows and columns using the following syntax:
-dimnames(tab) <- list(c("Row1", "Row2", "Row3"), c("Column1", "Column2"))
+#dimnames(tab) <- list(c("Row1", "Row2", "Row3"), c("Column1", "Column2"))
+
 
 ```
-We will be looking at different ways to visualize our data and understand correlations and tabulations next time! 
 
 * What kind of questions can we answer with this data?
 * What kind of conclusions could we draw?
 * What are the limitations of the data?
 
 
-# PS 109 Section 8, March 22, 2023
+### Let's try plotting other variables. Pick another variable of interest within the demographic variables and another one within the postvote variables.
+```{r}
+
+#Plot a barplot. Advanced users use 'ggplot'
+
+#Plot a scatterplot.
+
+#Plot a density plot. 
+
+
+#Which type of graph makes most sense for the variables you selected? Why?
+
+```
+
