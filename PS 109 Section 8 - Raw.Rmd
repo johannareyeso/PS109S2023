@@ -7,10 +7,16 @@ date: "2023-03-09"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+
 #setup
 library(ggplot2)
 library(IRkernel)
 library(dplyr)
+
+IRkernel::installspec()
+
+jupyter notebook
+
 
 #install.packages("dplyr")
 ```
