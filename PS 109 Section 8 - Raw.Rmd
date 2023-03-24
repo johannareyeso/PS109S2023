@@ -60,7 +60,6 @@ setwd("C:/Users/hanna/Documents/GitHub/PS109S2023")
 * What is an observation?
 * What is an object?
 * What is a command?
-* What is an environment?
 
 ```{r}
 #load data using the 'read.csv("name")' command. Advanced: load data and store it into an object
@@ -150,7 +149,7 @@ Time series data involves measurements or observations of a single variable over
 
 
 ## Understanding variables of interest
-Now that we know the connection between the codebook and the data, let's gather some information about Latinx politics.
+Now that we know the connection between the codebook and the data, let's gather some information about Latinx politics. Discuss the following with a partner.
 
 * What kind of demographic data did the survey collect?
 * What is the percentage of people who are Spanish, Hispanic or Latino?
