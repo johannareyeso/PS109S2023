@@ -54,8 +54,8 @@ Alternatively, you can use the 'setwd' command. To learn how to use any command,
 
 
 ```
+```{r}
 #load data using the 'read.csv' command. Advanced: load data and store it into an object
-
 #object_name <- object_contents
 
 anes <- read.csv("anes_latino.csv")
@@ -80,8 +80,8 @@ dim(anes)
 
 #How many rows does the data set have? How many columns? What do these represent?
 
-
 ```
+
 
 ## Understanding data contents and variables
 
@@ -152,43 +152,49 @@ Time to play around with two variables of interest. Let's say we are interested 
 #### How do we select one variable within a dataframe? Using the $ symbol.
 
 
-```
 #df$variable of interest
 
+```{r}
 #Refer to the dem_hisp and postvote_rvote variables using the $ symbol:
 
 anes$dem_hisp
 anes$postvote_rvote
 ```
 
-
-```
 #Check the range of the two variables using the 'range' command
+
+```{r}
 
 range(anes$dem_hisp)
 
+```
+
 #Why is the range 1 to 1?
 
+```{r}
 range(anes$postvote_rvote)
+```
 
-#How do we interpret this range? Let's take a look at the codebook again.
+How do we interpret this range? Let's take a look at the codebook again.
 
 
-#Let's assign shorter object names to these
+Let's assign shorter object names to these
 
+```{r}
 hisp <- anes$dem_hisp
 vote <- anes$postvote_rvote
 org <- anes$dem_hisptyp_1st
-
 ```
 
-#### Is there a relationship between country of origin and voting? Let's look at the correlation between the variables
+Is there a relationship between country of origin and voting? Let's look at the correlation between the variables
 
+```{r}
 
-```
 #Use the command 'cor'
 
 cor(org, vote)
+```
+
 
 #How can we interpret this? Maybe correlation is not the best way to look at the relationship between these two variables.
 
@@ -197,26 +203,27 @@ cor(org, vote)
 ##### Let's try to plot them!
 
 
-```
-
+```{r}
 #Create a histogram for each variable, using 'hist'
 hist(org)
 hist(vote)
+```
 
 #Create a bar plot of org and vote, use 'barplot'
 
+```{r}
 barplot(org, vote)
 
 #OK, not very helpful. How can we restrict our plot to 'yes' or 'no' answers?
 
 
 ```
-
 Let's try a scatterplot instead, use the 'plot' command
 
-
-```
+```{r}
 plot(org, vote)
+
+
 
 # Create a logical index to subset the data
 idx <- (vote %in% c(1, 4))
@@ -232,6 +239,9 @@ tab
 #Name the rows and columns using the following syntax:
 dimnames(tab) <- list(c("Row1", "Row2", "Row3"), c("Column1", "Column2"))
 
+
+```
+
 ```
 
 We will be looking at different ways to visualize our data and understand correlations and tabulations next time! 
@@ -239,3 +249,19 @@ We will be looking at different ways to visualize our data and understand correl
 * What kind of questions can we answer with this data?
 * What kind of conclusions could we draw?
 * What are the limitations of the data?
+
+
+
+### Let's try plotting other variables. Pick another variable of interest within the demographic variables and another one within the postvote variables.
+```{r}
+
+#Plot a barplot. Advanced users use 'ggplot'
+
+#Plot a scatterplot.
+
+#Plot a density plot. 
+
+
+#Which type of graph makes most sense for the variables you selected? Why?
+
+```
